@@ -2,4 +2,4 @@
 
 file="$1"
 
-tr A-Z\\n a-z\ <"${file}" | tr -d ,. | awk -v RS=" " '{count[$0]++} END {for (word in count) print word, count[word]}' | sort -nk2 | column -t
+tr 'A-Z\n' 'a-z ' <"${file}" | tr -d ,. | awk -v RS=" " '{count[$0]++} END {for (word in count) print word, count[word]}' | sort -nk2 | column -t
