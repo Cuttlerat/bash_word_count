@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-file="$1"
+file="./text"
 
-tr 'A-Z\n' 'a-z ' <"${file}" | tr -d ,. | awk -v RS=" " '{count[$0]++} END {for (word in count) print word, count[word]}' | sort -nk2 | column -t
+tr 'A-Z\n' 'a-z ' <"${file}" | tr -d ,\;. | awk -v RS=" " '{count[$0]++} END {for (word in count) print word, count[word]}' | sort -nk2 | column -t | awk 'NF==2'
