@@ -1,10 +1,18 @@
 # Word count
 Script for count word occurences in text
 
-```bash
-time ./word_count text >/dev/null
 
-real	0m0.257s
-user	0m0.258s
-sys	0m0.050s
+```bash
+# ./test.sh ./word_count
+OK
+
+Testing average time
+
+
+ Performance counter stats for './word_count' (10 runs):
+
+       0.225945797 seconds time elapsed                                          ( +-  2.22% )
 ```
+
+# Dependencies for tests
+## perf
