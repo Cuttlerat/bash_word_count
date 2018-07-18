@@ -4,23 +4,39 @@ set -eo pipefail
 
 [[ "${TRACE:-}" ]] && set -x
 
+print_line() {
+    printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' =
+}
+
 
 main() {
     [[ $# -eq 0 ]] && echo "Usage: $(basename $0) /path/to/script" && exit 1
     local script=("$@")
     
+    print_line
+    echo
+    echo " Testing correct output"
+    echo
+
     if cmp -s <("${script[@]}") ./test_data; then
-        echo "OK"
+        tput setaf 2
+        echo "  OK"
+        tput sgr 0
     else
-        echo "FAILED"
+        tput setaf 1
+        echo "  FAILED"
+        tput sgr 0
         exit 1
     fi
+    echo
+    print_line
     
     # Time
     echo
-    echo "Testing average time"
+    echo " Testing average time"
     echo
     perf stat -n -r 10 -B "${script[@]}" >/dev/null
+    print_line
 }
 
 main "$@"
